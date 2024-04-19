@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createPagoController = exports.createPagoUseCase = exports.notifiUseCase = exports.servicesNotification = exports.mysqlPagoRepository = void 0;
+const CreatePagoUseCase_1 = require("../app/CreatePagoUseCase");
+const PagoRepository_1 = require("./PagoRepository");
+const CreatePagoController_1 = require("./controllers/CreatePagoController");
+const NotifiNewPago_1 = require("./services/NotifiNewPago");
+const NotifiNewPago_2 = require("../app/services/NotifiNewPago");
+const socketio_1 = require("./services/socketio");
+const socketio = new socketio_1.SocketIO();
+exports.mysqlPagoRepository = new PagoRepository_1.MysqlPagoRepository();
+exports.servicesNotification = new NotifiNewPago_1.NotifiNewPago();
+exports.notifiUseCase = new NotifiNewPago_2.NotificationPagoUseCase(exports.servicesNotification);
+exports.createPagoUseCase = new CreatePagoUseCase_1.CreatePagoUseCase(exports.mysqlPagoRepository, exports.notifiUseCase, socketio);
+exports.createPagoController = new CreatePagoController_1.CreatePagoController(exports.createPagoUseCase);
