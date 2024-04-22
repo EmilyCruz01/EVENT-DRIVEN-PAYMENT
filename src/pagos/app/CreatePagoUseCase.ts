@@ -15,13 +15,14 @@ export class CreatePagoUseCase{
         orden:string,
         total:number
     ):Promise<Pago| null>{
+        console.log(orden,total)
         try {
             const pago = await this.PagoRepository.createPago(
                 orden,
                 total
             )
             if(pago)this.notification.run(pago)
-            this.socket.emit("payment", pago);
+            this.socket.emit("orden", pago);
 
             return pago;
         } catch (error) {

@@ -5,7 +5,7 @@ export class SocketIO implements ISocket {
   private socket: any
 
   constructor() {
-    this.socket = socketClient('https://ws-5u2i.onrender.com')
+    this.socket = socketClient('https://event-driven-socket.onrender.com')
   }
 
   emit(event: string, data: any) {
