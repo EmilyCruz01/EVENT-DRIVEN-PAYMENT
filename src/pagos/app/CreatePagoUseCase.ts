@@ -21,7 +21,7 @@ export class CreatePagoUseCase{
                 total
             )
             if(pago)this.notification.run(pago)
-            this.socket.emit("payment", pago);
+            this.socket.emit("orden", pago);
 
             return pago;
         } catch (error) {
